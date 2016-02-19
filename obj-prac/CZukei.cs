@@ -5,50 +5,48 @@ using System.Text;
 
 namespace obj_prac
 {
-    class CZukei
+    /**抽象クラスの宣言。CZukeiはnewできない*/
+    abstract class CZukei
     {
-        static Random rand = new Random();
+        /**CZukeiのリスト(配列のようなもの)*/
+        protected static List<CZukei> we = new List<CZukei>();
+
         /** データの種類*/
-        enum TYPE
+        protected enum TYPE
         {
             SHIKAKU,     // 四角形
             SANKAKU     // 三角形
         };
         /** 種類。処理を分けるのに利用する*/
-        TYPE type;
+        protected TYPE type;
         /** 底辺*/
-        float teihen;
+        protected float teihen;
         /** 高さ*/
-        float takasa;
+        protected float takasa;
 
-        Form1()
+        /**コンストラクタ(インスタンスがnewされて生成されたときに実行する初期化処理)*/
+        public CZukei()
         {
-            InitializeComponent();
+            // 底辺に1～10の乱数を求める
+            teihen = Form1.rand.Next(1, 11);
+            // 高さに1～10の乱数を求める
+            takasa = Form1.rand.Next(1, 11);
+        }
 
-            // 初期化
-            for (int i = 0; i < 5; i++)
+        /**子クラスがcalcを実装する必要がある*/
+        protected abstract string clac();
+
+        /**すべてのCZukeiの面積を求めて、文字列を返す*/
+        public static string calcAll()
+        {
+            string ret = "";//戻り値の文字列
+
+            //weから１つずつインスタンスを取り出して、meに入れてループ
+            foreach (CZukei me in we)
             {
-                // 四角形の作成
-                instantiateShikaku();
-                // 三角形の作成
-                instantiateSankaku();
+                ret += me.clac() + "\r\n";
             }
-        }
-
-        private void instantiateSankaku()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void instantiateShikaku()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void InitializeComponent()
-        {
-            throw new NotImplementedException();
+            return ret;
         }
     }
-}
 }
