@@ -100,3 +100,56 @@
 3. [Summary]欄に「完成」などと入力して、コミット(Commit)して、GitHubに反映させる(PublishかSyncを押す)
 
 以上です。
+
+
+# Pull Requestの作成
+課題に対してコメントをするために、以下の手順でPull Request(プルリクエスト)を作成してください。
+
+- github.comをWebブラウザーで開く
+- 自分のアカウントでSign inする
+- [Your repositories]から[obj-prac]を選択
+- 緑色の[New pull request]を押す
+- [Create pull request]を押す
+- タイトルに何か表示されているが、そのまま右下の[Create pull request]を押す(タイトルが空欄だったら、質疑応答などのタイトルをつける)
+以上で完了。
+
+これで、田中のところにPull requestが届いて、コメントのやりとりができるようになります。
+
+以降、[Pull requests]ボタンを押して、作成したPull Requestのタイトルをクリックすると、田中とのコメントのやりとりができます。
+
+
+# calcAll()とcalc()に関するヒント
+2/12の講義中に説明したメモは以下の通りです。
+
+```
+①呼び出し側
+for (int i = 0; i < type.Count; i++) 
+{ 
+    textBox1.AppendText(calc(i) + "\r\n"); 
+}
+↓
+textBox1.AppendText(表示したい文字列);
+「表示したい文字列」をtextBox1に出力する方法
+
+②呼び出され側
+calc(i)は・・・i番目の図形の面積を求めて、結果の文字列を返す
+
+-------------------
+CZukei.calcAll(textBox1.Text + "\r\n");
+↓
+CZukei.calcAll(textBox1);
+
+
+public static void calcAll(TextBox text) 
+{ 
+    // text = textBox1
+    foreach (CZukei me in we) 
+    { 
+        me.calc();     // ←ここを修正
+        // textBox1.AppendText(calc(i) + "\r\n");
+        // 上記のコードを、この関数内で動くように書き換える
+    } 
+} 
+
+```
+
